@@ -6,6 +6,7 @@
 
 //Bool RegisterCustomDatatypeCustomGUI();
 
+Bool RegisterMenuTest(void);
 void CommandLineRendering(C4DPL_CommandLineArgs* args);
 
 #endif // MAIN_H__

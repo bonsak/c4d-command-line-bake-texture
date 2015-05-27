@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>CE184861-3DE2-4146-9595-C487AD333A36</string>
+	<key>IDESourceControlProjectName</key>
+	<string>commandline-test</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>8264296C857E064025BBCFB4A4D64DF61989B45B</key>
+		<string>https://github.com/bonsak/c4d-command-line-bake-texture.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>commandline-test.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>8264296C857E064025BBCFB4A4D64DF61989B45B</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/bonsak/c4d-command-line-bake-texture.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>8264296C857E064025BBCFB4A4D64DF61989B45B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>8264296C857E064025BBCFB4A4D64DF61989B45B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>c4d-command-line-bake-texture</string>
+		</dict>
+	</array>
+</dict>
+</plist>

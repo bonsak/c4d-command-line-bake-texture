@@ -25,12 +25,13 @@ fi
 #include <string.h>
 #include <ctype.h>
 #include "main.h"
+#include "tbaketexture.h"
 
 #if defined(MAXON_TARGET_OSX) || defined(MAXON_TARGET_LINUX)
 	#include <unistd.h>	// getcwd
-#elif defined MAXON_TARGET_WINDOWS
-	#include <direct.h>
-	#define getcwd _getcwd
+//#elif defined MAXON_TARGET_WINDOWS
+//	#include <direct.h>
+//	#define getcwd _getcwd
 #endif
 
 Float lastProgressValue = -1.0;
@@ -38,31 +39,31 @@ RENDERPROGRESSTYPE lastProgressType = RENDERPROGRESSTYPE_AFTERRENDERING;
 
 static void RenderProgressHook(Float p, RENDERPROGRESSTYPE progress_type, void* context)
 {
-	if (Abs(p - lastProgressValue) > 0.01 || progress_type != lastProgressType)
+	if (Abs(p - lastProgressValue) > 10 || progress_type != lastProgressType)
 	{
 		if (progress_type != lastProgressType)
 		{
 			switch (progress_type)
 			{
-				case RENDERPROGRESSTYPE_AFTERRENDERING:
-					lastProgressValue = 1.0;	// no further output necessary
-					GeConsoleOut("Rendering Phase: Finalize");
-					break;
-
-				case RENDERPROGRESSTYPE_BEFORERENDERING:
-					lastProgressValue = -1.0;	// output new percent value
-					GeConsoleOut("Rendering Phase: Setup");
-					break;
+//				case RENDERPROGRESSTYPE_AFTERRENDERING:
+//					lastProgressValue = 1.0;	// no further output necessary
+//					GeConsoleOut("Rendering Phase: Finalize");
+//					break;
+//
+//				case RENDERPROGRESSTYPE_BEFORERENDERING:
+//					lastProgressValue = -1.0;	// output new percent value
+//					GeConsoleOut("Rendering Phase: Setup");
+//					break;
 
 				case RENDERPROGRESSTYPE_DURINGRENDERING:
 					lastProgressValue = -1.0;	// output new percent value
 					GeConsoleOut("Rendering Phase: Main Render");
 					break;
 
-				case RENDERPROGRESSTYPE_GLOBALILLUMINATION:
-					lastProgressValue = -1.0;	// output new percent value
-					GeConsoleOut("Rendering Phase: Global Illumination");
-					break;
+//				case RENDERPROGRESSTYPE_GLOBALILLUMINATION:
+//					lastProgressValue = -1.0;	// output new percent value
+//					GeConsoleOut("Rendering Phase: Global Illumination");
+//					break;
 			}
 
 		}
@@ -75,6 +76,11 @@ static void RenderProgressHook(Float p, RENDERPROGRESSTYPE progress_type, void* 
 		lastProgressValue = p;
 		lastProgressType	= progress_type;
 	}
+}
+
+inline const char * const BoolToString(bool b)
+{
+    return b ? "true" : "false";
 }
 
 void CommandLineRendering(C4DPL_CommandLineArgs* args)
@@ -121,14 +127,16 @@ void CommandLineRendering(C4DPL_CommandLineArgs* args)
 				}
 				else
 				{
-#ifdef MAXON_TARGET_OSX
+//#ifdef MAXON_TARGET_OSX
+                    
 					tmp.SetCString(args->argv[i], -1, STRINGENCODING_UTF8);	// MacOS X is using UTF8 as encoding
 //                    GeConsoleOut("Dette er tmp string: " + tmp);
-#else
-					tmp.SetCString(args->argv[i], -1);
-#endif
+//#else
+//					tmp.SetCString(args->argv[i], -1);
+//#endif
+                    GeConsoleOut(tmp);
 					filename += tmp;
-
+                    
 					args->argv[i] = nullptr;
 				}
 			}
@@ -280,12 +288,12 @@ void CommandLineRendering(C4DPL_CommandLineArgs* args)
 				startup[len] = 0;
 			}
 
-#ifdef MAXON_TARGET_OSX
+//#ifdef MAXON_TARGET_OSX
 			tmp.SetCString(args->argv[i], -1, STRINGENCODING_UTF8);	// MacOS X is using UTF8 as encoding
 			fn = tmp + fn.GetFile();
-#else
-			fn = Filename(startup) + fn.GetFile();
-#endif
+//#else
+//			fn = Filename(startup) + fn.GetFile();
+//#endif
 		}
 
 		do
@@ -300,6 +308,24 @@ void CommandLineRendering(C4DPL_CommandLineArgs* args)
 			}
 
 			doc = LoadDocument(fn, SCENEFILTER_OBJECTS | SCENEFILTER_MATERIALS | SCENEFILTER_PROGRESSALLOWED | SCENEFILTER_DIALOGSALLOWED | SCENEFILTER_NONEWMARKERS, nullptr);	// FIX[57267] - !! markers should be kept in all places where they do not need to be changed !!
+            
+            // Racecar custom start
+            BaseObject *obj = doc->GetFirstObject();
+            
+//            GeConsoleOut("First object: " + obj->GetName());
+            
+            for (BaseTag *tag = obj->GetFirstTag(); tag; tag = tag->GetNext()) {
+                if (tag->IsInstanceOf(Tbaketexture)) {
+//                    TextureTag* texTag = static_cast<TextureTag*>(tag);
+                    GeConsoleOut("The bake texture tag name: " + tag->GetName());
+                    BaseContainer* bc = tag->GetDataInstance();
+                    GeConsoleOut( BoolToString( bc->GetBool(BAKETEXTURE_SINGLEFILE) ) );
+//                    texTag->Append(texTag);
+                }
+//                GeConsoleOut(texTag->GetName());
+            }
+            // Racecar custom end
+            
 			if (!doc)
 			{
 				SetExitCode(RENDERRESULT_ERRORLOADINGPROJECT);

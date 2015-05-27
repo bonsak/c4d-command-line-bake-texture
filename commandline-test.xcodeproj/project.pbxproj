@@ -11,6 +11,9 @@
 		A0A66833398066F297010000 /* commandlinerender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A0A66833398066F297000000 /* commandlinerender.cpp */; };
 		A0A6683339E921D362010000 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A0A6683339E921D362000000 /* main.cpp */; };
 		A0A6683339F470FF41010000 /* libcinema.framework.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A6683339F470FF41000000 /* libcinema.framework.a */; };
+		E99336D01B15BFF50011605A /* bake_texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E99336CE1B15BFF50011605A /* bake_texture.cpp */; };
+		E99336D11B15BFF50011605A /* bake_texture.h in Headers */ = {isa = PBXBuildFile; fileRef = E99336CF1B15BFF50011605A /* bake_texture.h */; };
+		E99336E81B15F1740011605A /* menutest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E99336DC1B15F1740011605A /* menutest.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +48,9 @@
 		A0A66833398066F297000000 /* commandlinerender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = commandlinerender.cpp; path = source/other/commandlinerender.cpp; sourceTree = SOURCE_ROOT; };
 		A0A6683339E921D362000000 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = source/main.cpp; sourceTree = SOURCE_ROOT; };
 		A0A6683339F470FF41020000 /* cinema.framework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cinema.framework.xcodeproj; path = ../../frameworks/cinema.framework/project/cinema.framework.xcodeproj; sourceTree = SOURCE_ROOT; };
+		E99336CE1B15BFF50011605A /* bake_texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bake_texture.cpp; path = source/other/bake_texture.cpp; sourceTree = SOURCE_ROOT; };
+		E99336CF1B15BFF50011605A /* bake_texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bake_texture.h; path = source/other/bake_texture.h; sourceTree = SOURCE_ROOT; };
+		E99336DC1B15F1740011605A /* menutest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = menutest.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +104,8 @@
 			isa = PBXGroup;
 			children = (
 				A0A66833398066F297000000 /* commandlinerender.cpp */,
+				E99336CE1B15BFF50011605A /* bake_texture.cpp */,
+				E99336CF1B15BFF50011605A /* bake_texture.h */,
 			);
 			name = other;
 			path = ../source/other;
@@ -106,6 +114,7 @@
 		A0A6683339CA90681B000000 /* source */ = {
 			isa = PBXGroup;
 			children = (
+				E99336D31B15F1740011605A /* gui */,
 				A0A66833391170EC1C000000 /* other */,
 				A0A6683339E921D362000000 /* main.cpp */,
 				A0A66833391837B5E7000000 /* main.h */,
@@ -123,6 +132,15 @@
 			name = products;
 			sourceTree = "<group>";
 		};
+		E99336D31B15F1740011605A /* gui */ = {
+			isa = PBXGroup;
+			children = (
+				E99336DC1B15F1740011605A /* menutest.cpp */,
+			);
+			name = gui;
+			path = source/gui;
+			sourceTree = SOURCE_ROOT;
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -131,6 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0A66833391837B5E7010000 /* main.h in Headers */,
+				E99336D11B15BFF50011605A /* bake_texture.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,6 +230,8 @@
 			files = (
 				A0A66833398066F297010000 /* commandlinerender.cpp in Sources */,
 				A0A6683339E921D362010000 /* main.cpp in Sources */,
+				E99336D01B15BFF50011605A /* bake_texture.cpp in Sources */,
+				E99336E81B15F1740011605A /* menutest.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
