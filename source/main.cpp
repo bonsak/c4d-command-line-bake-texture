@@ -24,14 +24,14 @@
 
 #include "c4d.h"
 #include <string.h>
+#include <ctype.h>
 #include "main.h"
-#include <iostream>
-using namespace std;
+//#include <iostream>
+//using namespace std;
 
 
 Bool PluginStart(void)
 {
-    GePrint("Commandline render is here");
 	return true;
 }
 
@@ -62,7 +62,7 @@ Bool PluginMessage(Int32 id, void* data)
 			//sample implementation of command line rendering:
 //			void CommandLineRendering(C4DPL_CommandLineArgs* args);
             
-            GePrint("calling commandlinerendering funskjon");
+//            GePrint("calling commandlinerendering funskjon");
 //            void CommandLineRendering(C4DPL_CommandLineArgs* args);
             
             CommandLineRendering((C4DPL_CommandLineArgs*)data);
