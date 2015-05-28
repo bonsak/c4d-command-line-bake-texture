@@ -46,9 +46,9 @@ Bool PluginMessage(Int32 id, void* data)
 	switch (id)
 	{
 		case C4DPL_INIT_SYS:
-//			if (!resource.Init())
-//				return false;		// don't start plugin without resource
-//			return true;
+			if (!resource.Init())
+				return false;		// don't start plugin without resource
+			return true;
 
 		case C4DMSG_PRIORITY:
 			//react to this message to set a plugin priority (to determine in which order plugins are initialized or loaded
@@ -65,31 +65,31 @@ Bool PluginMessage(Int32 id, void* data)
 
 			//react to this message to react to command line arguments on startup
 			
-			{
-				C4DPL_CommandLineArgs *args = (C4DPL_CommandLineArgs*)data;
-				Int32 i;
-
-				for (i = 0; i<args->argc; i++)
-				{
-					if (!args->argv[i]) continue;
-
-					if (!strcmp(args->argv[i],"--help") || !strcmp(args->argv[i],"-help"))
-					{
-						// do not clear the entry so that other plugins can make their output!!!
-						GePrint("\x01-SDK is here :-)");
-					}
-					else if (!strcmp(args->argv[i],"-SDK"))
-					{
-						args->argv[i] = nullptr;
-						GePrint("\x01-SDK executed:-)");
-					}
-					else if (!strcmp(args->argv[i],"-plugincrash"))
-					{
-						args->argv[i] = nullptr;
-						*((Int32*)0) = 1234;
-					}
-				}
-			}
+//			{
+//				C4DPL_CommandLineArgs *args = (C4DPL_CommandLineArgs*)data;
+//				Int32 i;
+//
+//				for (i = 0; i<args->argc; i++)
+//				{
+//					if (!args->argv[i]) continue;
+//
+//					if (!strcmp(args->argv[i],"--help") || !strcmp(args->argv[i],"-help"))
+//					{
+//						// do not clear the entry so that other plugins can make their output!!!
+//						GePrint("\x01-SDK is here :-)");
+//					}
+//					else if (!strcmp(args->argv[i],"-SDK"))
+//					{
+//						args->argv[i] = nullptr;
+//						GePrint("\x01-SDK executed:-)");
+//					}
+//					else if (!strcmp(args->argv[i],"-plugincrash"))
+//					{
+//						args->argv[i] = nullptr;
+//						*((Int32*)0) = 1234;
+//					}
+//				}
+//			}
 			
 			break;
 
