@@ -1,27 +1,3 @@
-// This is the main file of the CINEMA 4D SDK
-//
-// When you create your own projects much less code is needed (this file is rather long as it tries to show all kinds of different uses).
-//
-// An empty project simply looks like this:
-//
-// #include "c4d.h"
-//
-// Bool PluginStart(void)
-// {
-//   ...do or register something...
-//   return true;
-// }
-//
-// void PluginEnd(void)
-// {
-// }
-//
-// Bool PluginMessage(Int32 id, void *data)
-// {
-//   return false;
-// }
-//
-
 #include "c4d.h"
 #include <string.h>
 #include <ctype.h>
@@ -64,32 +40,33 @@ Bool PluginMessage(Int32 id, void* data)
 //            CommandLineRendering((C4DPL_CommandLineArgs*)data);
 
 			//react to this message to react to command line arguments on startup
-			
-//			{
-//				C4DPL_CommandLineArgs *args = (C4DPL_CommandLineArgs*)data;
-//				Int32 i;
-//
-//				for (i = 0; i<args->argc; i++)
-//				{
-//					if (!args->argv[i]) continue;
-//
-//					if (!strcmp(args->argv[i],"--help") || !strcmp(args->argv[i],"-help"))
-//					{
-//						// do not clear the entry so that other plugins can make their output!!!
-//						GePrint("\x01-SDK is here :-)");
-//					}
-//					else if (!strcmp(args->argv[i],"-SDK"))
-//					{
-//						args->argv[i] = nullptr;
-//						GePrint("\x01-SDK executed:-)");
-//					}
-//					else if (!strcmp(args->argv[i],"-plugincrash"))
-//					{
-//						args->argv[i] = nullptr;
-//						*((Int32*)0) = 1234;
-//					}
-//				}
-//			}
+			/*
+			{
+				C4DPL_CommandLineArgs *args = (C4DPL_CommandLineArgs*)data;
+				Int32 i;
+
+				for (i = 0; i<args->argc; i++)
+				{
+					if (!args->argv[i]) continue;
+
+					if (!strcmp(args->argv[i],"--help") || !strcmp(args->argv[i],"-help"))
+					{
+						// do not clear the entry so that other plugins can make their output!!!
+						GePrint("\x01-SDK is here :-)");
+					}
+					else if (!strcmp(args->argv[i],"-SDK"))
+					{
+						args->argv[i] = nullptr;
+						GePrint("\x01-SDK executed:-)");
+					}
+					else if (!strcmp(args->argv[i],"-plugincrash"))
+					{
+						args->argv[i] = nullptr;
+						*((Int32*)0) = 1234;
+					}
+				}
+			}
+             */
 			
 			break;
 

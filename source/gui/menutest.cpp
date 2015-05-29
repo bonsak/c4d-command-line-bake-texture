@@ -21,7 +21,6 @@ Bool MenuTest::Execute(BaseDocument *doc)
     // let's use the same UVW tag for all texture tags
     UVWTag* uvwTag = (UVWTag*)obj->GetTag(Tuvw);
     
-    GePrint("We got to if(uvwTag");
     if(uvwTag == nullptr)
         return true;
     
@@ -40,32 +39,34 @@ Bool MenuTest::Execute(BaseDocument *doc)
             textureTagArray.Append((TextureTag*)tag);
             uvwTags.Append((UVWTag*)uvwTag);
         }
-        
         tag = tag->GetNext();
     }
     
-    GePrint("We got to textureTagArray");
     // check if there is something to do
     if(textureTagArray.GetCount() == 0)
         return true;
     
     // setup bake settings
+    Int32 BakeWidth = 256;
+    Int32 BakeHeight = 256;
     BaseContainer settings;
-    settings.SetInt32(BAKE_TEX_WIDTH,1024);
-    settings.SetInt32(BAKE_TEX_HEIGHT, 1024);
+    settings.SetInt32(BAKE_TEX_WIDTH,BakeWidth);
+    settings.SetInt32(BAKE_TEX_HEIGHT, BakeHeight);
     settings.SetInt32(BAKE_TEX_PIXELBORDER, 0);
     settings.SetBool(BAKE_TEX_CONTINUE_UV, true);
     settings.SetBool(BAKE_TEX_USE_PHONG_TAG, true);
     settings.SetVector(BAKE_TEX_FILL_COLOR, Vector(0.0));
     settings.SetBool(BAKE_TEX_COLOR, true);
     settings.SetBool(BAKE_TEX_COLOR_ILLUM, false);
-    settings.SetBool(BAKE_TEX_COLOR_SHADOWS, false);
+    settings.SetBool(BAKE_TEX_COLOR_SHADOWS, true);
     settings.SetBool(BAKE_TEX_COLOR_LUMINANCE, false);
     settings.SetBool(BAKE_TEX_COLOR_DIFFUSION, false);
+//    settings.SetBool(BAKE_TEX_LUMINANCE, true);
     
+    void SetName( const String & name );
+
     // InitBakeTexure
     BAKE_TEX_ERR err;
-    GePrint("We got to InitBakeTexture");
     BaseDocument* bakeDoc = InitBakeTexture(
                                             doc,
                                             textureTagArray.GetFirst(),
@@ -76,23 +77,29 @@ Bool MenuTest::Execute(BaseDocument *doc)
                                             &err,
                                             nullptr
                                             );
-    GePrint("We passed InitBakeTexture");
     // if success, do bake
     if(err == BAKE_TEX_ERR_NONE)
     {
-        GePrint("We're baking!");
+        const String LayerNameOne = "Shadow";
+        const String LayerNameTwo = "Gi";
         // prepare multipass bitmap
-        MultipassBitmap* bitmap = MultipassBitmap::Alloc(1024,1024,COLORMODE_RGB);
+        MultipassBitmap* bitmap = MultipassBitmap::Alloc(BakeWidth,BakeHeight,COLORMODE_RGB);
         // bake
         BakeTexture(bakeDoc,settings,bitmap,nullptr,nullptr,nullptr);
         // show result
+//        Int NumLayers = bitmap->GetLayerCount();
+        
+        MultipassBitmap* layerOne = bitmap->AddLayer( bitmap, COLORMODE_RGB );
+//        layerOne->SetName(LayerNameOne);
+        MultipassBitmap* layerTwo = bitmap->AddLayer( layerOne, COLORMODE_RGB );
+//        layerTwo->SetName(LayerNameTwo);
+        
         ShowBitmap(bitmap);
         // clear result
         MultipassBitmap::Free(bitmap);
     }
     else if(err != BAKE_TEX_ERR_NONE)
     {
-        GePrint("We're not baking!");
         MessageDialog(GeLoadString(err));
     }
     
